@@ -262,10 +262,13 @@ func (h *HelmCluster) SetupConsulClient(t *testing.T, secure bool) *api.Client {
 		}
 	}
 
+	clientsList, err := h.kubernetesClient.CoreV1().Pods(namespace).List(context.Background(), metav1.ListOptions{LabelSelector: "component=client"})
+	require.NoError(t, err)
+
 	tunnel := terratestk8s.NewTunnelWithLogger(
 		h.helmOptions.KubectlOptions,
 		terratestk8s.ResourceTypePod,
-		fmt.Sprintf("%s-consul-server-0", h.releaseName),
+		clientsList.Items[0].Name,
 		localPort,
 		remotePort,
 		h.logger)
