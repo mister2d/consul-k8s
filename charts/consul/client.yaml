@@ -1,0 +1,32 @@
+global:
+  enabled: false
+  datacenter: home
+  logLevel: "debug"
+  acls:
+    manageSystemACLs: true
+    bootstrapToken:
+      secretName: consul-bootstrap-token
+      secretKey: token
+  gossipEncryption:
+    secretName: consul-gossip-key
+    secretKey: key
+  tls:
+    enabled: true
+    enableAutoEncrypt: true
+    caCert:
+      secretName: consul-ca-cert
+      secretKey: ca.crt
+
+externalServers:
+  enabled: true
+  hosts: ["10.0.1.15","10.0.1.16","10.0.1.17"]
+  httpsPort: 8501
+  tlsServerName: null
+  useSystemRoots: false
+  k8sAuthMethodHost: 'https://node01.home.lan:6443'
+
+client:
+  enabled: true
+  exposeGossipPorts: true
+  grpc: true
+  join: ["10.0.1.15","10.0.1.16","10.0.1.17"]
