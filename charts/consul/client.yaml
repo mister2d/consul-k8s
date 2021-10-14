@@ -30,3 +30,6 @@ client:
   exposeGossipPorts: true
   grpc: true
   join: ["10.0.1.15","10.0.1.16","10.0.1.17"]
+
+syncCatalog:
+  enabled: true
