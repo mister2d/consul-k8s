@@ -33,3 +33,5 @@ client:
 
 syncCatalog:
   enabled: true
+  default: false
+  k8sDenyNamespaces: [ "csi-bumblebee", "csi-ironhide", "kube-node-lease", "kube-public", "kube-system" ]

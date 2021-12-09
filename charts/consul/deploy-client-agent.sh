@@ -2,6 +2,8 @@
 
 set -eou pipefail
 
+VERSION=0.38.0
+
 GOSSIP_SECRET_NAME=consul-gossip-key
 GOSSIP_KEY=$(vault kv get -field=key kv-v2/consul/gossip/encryption)
 
@@ -47,6 +49,7 @@ kubectl create secret \
 # Deploy Consul Helm chart
 helm install --values client.yaml \
              --namespace ${NAMESPACE:-default} \
+             --version ${VERSION} \
              consul-client \
              hashicorp/consul
 
